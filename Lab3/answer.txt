@@ -1,0 +1,11 @@
+If pagination (Skip() / Take()) is applied after calling .ToList(), the query is already materialized.
+This means Entity Framework Core has executed the SQL and loaded all records from the database into memory.
+As a result, pagination happens in memory instead of being translated into SQL.
+
+This is problematic for large datasets because:
+
+all rows are loaded into RAM, which increases memory usage;
+
+it transfers unnecessary data from the database;
+
+performance and scalability decrease as the dataset grows.
